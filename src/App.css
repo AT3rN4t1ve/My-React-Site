@@ -1,135 +1,213 @@
-/* จัดหน้าให้อยู่ตรงกลาง */
 .container {
-  max-width: 1000px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 2rem;
+  animation: fadeIn 0.8s ease-out;
 }
 
-.header {
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.header-text {
   margin-bottom: 2rem;
-  opacity: 0.6;
-  font-weight: bold;
-  letter-spacing: 1px;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  color: var(--text-secondary);
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
-/* --- BENTO GRID SYSTEM --- */
+/* --- GRID LAYOUT --- */
 .bento-grid {
   display: grid;
-  /* แบ่งเป็น 3 คอลัมน์ เท่าๆ กัน */
-  grid-template-columns: repeat(3, 1fr); 
-  /* ความสูงของแถว ให้ยืดหยุ่น */
-  grid-auto-rows: minmax(180px, auto);
-  gap: 1.5rem; /* ระยะห่างระหว่างกล่อง */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  grid-auto-rows: minmax(160px, auto);
 }
 
-/* สไตล์พื้นฐานของการ์ด (Bento Box) */
+/* --- CARD DESIGN (Glassmorphism Lite) --- */
 .card {
-  background-color: #1a1a1a; /* สีพื้นหลังกล่อง (Dark) */
-  border-radius: 24px; /* มุมโค้งมนสไตล์ Apple/iOS */
-  padding: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  justify-content: space-between;
+  overflow: hidden;
+  position: relative;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
-/* --- การจัดวาง (Grid Areas) --- */
+/* Title ในการ์ด */
+.card h3 {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
 
-/* กล่อง Profile: กินพื้นที่ 2 คอลัมน์แนวนอน */
+/* --- SPECIFIC CARDS --- */
+
+/* 1. Profile */
 .profile-card {
-  grid-column: span 2; 
-  align-items: flex-start; /* จัดชิดซ้าย */
-  background: linear-gradient(145deg, #242424, #1a1a1a);
+  grid-column: span 2; /* กิน 2 ช่อง */
+  grid-row: span 2;    /* กิน 2 แถว (ทำให้ใหญ่ขึ้น) */
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  justify-content: flex-end; /* ตัวหนังสืออยู่ล่าง */
 }
 
-.profile-content {
+.profile-badge {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: rgba(99, 102, 241, 0.2);
+  color: #818cf8;
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.profile-info h1 {
+  font-size: 2.5rem;
+  background: linear-gradient(to right, #fff, #94a3b8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.role {
+  color: var(--accent-color);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.bio {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* 2. Tech Stack */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tags span {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tags span.highlight {
+  background: rgba(99, 102, 241, 0.2);
+  color: #a5b4fc;
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+/* 3. Playground */
+.counter-box {
   display: flex;
   align-items: center;
-  gap: 2rem;
-  text-align: left;
-}
-
-.profile-img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  border: 3px solid #646cff;
-  object-fit: cover;
-}
-
-/* กล่อง Social: กินพื้นที่ 3 คอลัมน์ (เต็มแถว) */
-.social-card {
-  grid-column: span 3;
-  flex-direction: row;
   justify-content: space-between;
-  background-color: #2a2a2a;
+  margin-top: auto;
 }
 
-/* --- Responsive Design (มือถือ) --- */
+.count-number {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.playground-card button {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.playground-card button:hover {
+  background: #4f46e5;
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+/* 4. Status */
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #4ade80; /* สีเขียว */
+  font-weight: 500;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: #4ade80;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #4ade80;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* 5. Links */
+.link-card {
+  grid-column: span 3; /* เต็มแถว */
+  flex-direction: row;
+  align-items: center;
+  background: transparent;
+  border: 1px dashed rgba(255,255,255,0.1);
+}
+
+.link-item {
+  margin-right: 2rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.link-item:hover {
+  color: var(--accent-color);
+}
+
+/* --- MOBILE RESPONSIVE --- */
 @media (max-width: 768px) {
   .bento-grid {
-    grid-template-columns: 1fr; /* เหลือคอลัมน์เดียว */
+    grid-template-columns: 1fr;
   }
-  
-  .profile-card, .social-card {
-    grid-column: span 1; /* กลับมาขนาดปกติ */
+  .profile-card, .link-card {
+    grid-column: span 1;
+    grid-row: auto;
   }
-  
-  .profile-content {
+  .link-card {
     flex-direction: column;
-    text-align: center;
-  }
-  
-  .social-card {
-    flex-direction: column;
+    align-items: flex-start;
     gap: 1rem;
   }
-}
-
-/* --- ของเดิม (Logos & Button) --- */
-.logo {
-  height: 4em;
-  padding: 0.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-h1 {
-  font-size: 2rem;
-  line-height: 1.1;
-  margin: 0;
-}
-
-.links {
-  display: flex;
-  gap: 1rem;
-}
-
-.social-link {
-  padding: 0.5rem 1.5rem;
-  background: rgba(255,255,255,0.1);
-  border-radius: 50px;
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  transition: background 0.2s;
-}
-
-.social-link:hover {
-  background: #646cff;
 }

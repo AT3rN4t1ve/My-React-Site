@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
@@ -8,63 +6,69 @@ function App() {
 
   return (
     <div className="container">
-      {/* ส่วนหัว Header เล็กๆ */}
-      <header className="header">
-        <p>CI/CD Playground 🚀</p>
+      
+      {/* ส่วนหัวเหลือแค่ข้อความเท่ๆ */}
+      <header className="header-text">
+        <p>PORTFOLIO / PLAYGROUND</p>
       </header>
 
-      {/* เริ่มต้น Bento Grid */}
       <div className="bento-grid">
         
-        {/* กล่อง 1 (ใหญ่): Profile Info */}
+        {/* Card 1: Profile (Highlight) */}
         <div className="card profile-card">
-          <div className="profile-content">
-            {/* ลองเปลี่ยน src เป็นรูปตัวเองดูนะครับ */}
-            <img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" className="profile-img" alt="Profile" />
-            <div>
-              <h1>Atthakit Khampraphai</h1>
-              <p>Intern Developer</p>
-              <p style={{ opacity: 0.7, fontSize: '0.9em' }}>
-                กำลังฝึกวิชา CI/CD + React<br/>
-                ว่างงานอยู่ หาไรทำแก้เบื่อครับ 555
-              </p>
-            </div>
+          <div className="profile-badge">INTERN</div>
+          <div className="profile-info">
+            <h1>Atthakit K.</h1>
+            <p className="role">Frontend & CI/CD Enthusiast</p>
+            <p className="bio">
+              กำลังฝึกวิชา GitHub Actions + React<br/>
+              เปลี่ยนเรื่องยากให้เป็นเรื่องอัตโนมัติ 🤖
+            </p>
           </div>
         </div>
 
-        {/* กล่อง 2 (เล็ก): Tech Stack */}
-        <div className="card tech-card">
+        {/* Card 2: Tech Stack (Minimal List) */}
+        <div className="card stack-card">
           <h3>Tech Stack</h3>
-          <div className="logos">
-            <a href="https://vite.dev" target="_blank">
-              <img src={viteLogo} className="logo" alt="Vite logo" />
-            </a>
-            <a href="https://react.dev" target="_blank">
-              <img src={reactLogo} className="logo react" alt="React logo" />
-            </a>
+          <div className="tags">
+            <span>React</span>
+            <span>Vite</span>
+            <span className="highlight">GitHub Actions</span>
+            <span>CSS Grid</span>
           </div>
-          <p style={{fontSize: '0.8rem', marginTop: '10px'}}>Powered by GitHub Actions</p>
         </div>
 
-        {/* กล่อง 3 (เล็ก): Counter (Logic เดิม) */}
-        <div className="card counter-card">
-          <h3>Playground</h3>
-          <button onClick={() => setCount((count) => count + 1)}>
-            Count is {count}
-          </button>
-          <p style={{fontSize: '0.8rem', marginTop: '10px'}}>
-            State จะหายถ้า Refresh<br/>(แต่ Deploy ไม่หายนะ)
+        {/* Card 3: Interactive Playground */}
+        <div className="card playground-card">
+          <h3>Interactive</h3>
+          <div className="counter-box">
+            <span className="count-number">{count}</span>
+            <button onClick={() => setCount(c => c + 1)}>
+              + Click Me
+            </button>
+          </div>
+        </div>
+
+        {/* Card 4: Status (โชว์ว่า Deploy จริง) */}
+        <div className="card status-card">
+          <h3>System Status</h3>
+          <div className="status-indicator">
+            <span className="dot"></span>
+            <span>All Systems Operational</span>
+          </div>
+          <p style={{fontSize: '0.8rem', color: '#64748b', marginTop: '5px'}}>
+            Deployed via GitHub Pages
           </p>
         </div>
 
-        {/* กล่อง 4 (ยาว): Social / Links */}
-        <div className="card social-card">
-          <h3>Find me on</h3>
-          <div className="links">
-            <a href="https://github.com" target="_blank" className="social-link">GitHub</a>
-            <a href="#" className="social-link">LinkedIn</a>
-            <a href="#" className="social-link">Resume</a>
-          </div>
+        {/* Card 5: Social Links */}
+        <div className="card link-card">
+          <a href="https://github.com" target="_blank" className="link-item">
+            GitHub ↗
+          </a>
+          <a href="#" className="link-item">
+            LinkedIn ↗
+          </a>
         </div>
 
       </div>
